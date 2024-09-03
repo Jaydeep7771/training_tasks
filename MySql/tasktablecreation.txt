@@ -1,0 +1,69 @@
+mysql> use lbs;
+Database changed
+mysql> CREATE TABLE Students
+    -> (
+    ->   student_id INT NOT NULL,
+    ->   name VARCHAR(50) NOT NULL,
+    ->   age INT NOT NULL,
+    ->   major VARCHAR(50) NOT NULL,
+    ->   gpa FLOAT NOT NULL,
+    ->   enrollment_date DATE NOT NULL,
+    ->   PRIMARY KEY (student_id)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>
+mysql> CREATE TABLE Courses
+    -> (
+    ->   course_id INT NOT NULL,
+    ->   course_name VARCHAR(50) NOT NULL,
+    ->   credits INT NOT NULL,
+    ->   PRIMARY KEY (course_id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> CREATE TABLE Enrollment
+    -> (
+    ->   enrollment_id INT NOT NULL,
+    ->   enrollment_date DATE NOT NULL,
+    ->   student_id INT NOT NULL,
+    ->   course_id INT NOT NULL,
+    ->   FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    ->   FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO Students (student_id, name, age, major, gpa, enrollment_date)
+    -> VALUES
+    -> (101, 'Alice Johnson', 20, 'Computer Science', 3.8, '2022-09-01'),
+    -> (102, 'Bob Smith', 19, 'Mathematics', 3.6, '2022-09-01'),
+    -> (103, 'Charlie Brown', 21, 'Biology', 3.7, '2022-09-01'),
+    -> (104, 'Diana Prince', 22, 'Physics', 3.9, '2022-09-01'),
+    -> (105, 'Ethan Hunt', 20, 'Engineering', 3.5, '2022-09-01'),
+    -> (106, 'Fiona Gallagher', 21, 'Mathematics', 3.4, '2022-09-01');
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Courses (course_id,
+    -> course_name, credits)
+    -> VALUES
+    -> (201, 'Introduction to Programming', 3),
+    -> (202, 'Calculus I', 4),
+    -> (203, 'Biology 101', 3),
+    -> (204, 'Physics Fundamentals', 4),
+    -> (205, 'Data Structures', 3),
+    -> (206, 'Advanced Mathematics', 3);
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+mysql> INSERT INTO Enrollment (enrollment_id,
+    -> student_id, course_id, enrollment_date)
+    -> VALUES
+    -> (301, 101, 201, '2023-01-20'),
+    -> (302, 102, 202, '2023-03-25'),
+    -> (303, 103, 203, '2023-04-15'),
+    -> (304, 104, 204, '2022-11-10'),
+    -> (305, 105, 205, '2022-08-25'),
+    -> (306, 106, 202, '2023-03-01');
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0

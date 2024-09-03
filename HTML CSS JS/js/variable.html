@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function hello(){
+
+            if(true){
+                let a=56;
+                const c=90;
+                var b=78;
+                console.log(`inside block let: ${a}`);
+                console.log(`inside block let: ${b}`);
+                console.log(`inside block let: ${c}`);
+            }
+            
+            console.log(`outside let:${a}`);
+            console.log(`outside let:${b}`);
+            console.log(`outside let:${c}`);
+        }
+        hello();
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Form</title>
+</head>
+<body>
+    <h1>Registration Form </h1>
+    <form action="">
+        <div>
+        <label for="name">fullname</label>
+        <input type="text" placeholder="John" id="name">
+    </div>
+    <div>
+        <label for="dob">date of birth</label>
+        <input type="date" id="dob">
+    </div>
+    <div>
+        <label for="profile">Profile Picture</label>
+        <input type="file" name="" id="profile">
+    </div>
+    <div>
+        <label for="gender">Gender</label>
+        <input type="radio" id="gender" value="male" name="gender">MALE
+        <input type="radio" id="gender" value="female" name="gender">female
+    </div>
+    <div>
+        <label for="lang">Languages Known</label>
+        <input type="checkbox"  id="check1" value="hindi">Hindi
+        <input type="checkbox"  id="check2" value="eng">English
+    </div>
+    <div>
+        <label for="password"></label>
+        <input type="password" name="" id="password" placeholder="secret">
+    </div>
+    <div>
+        <label for="fvcolor">Select</label>
+        <input type="color" id="fvcolor" value="#4000ff">
+    </div>
+    <div>
+        <label for="age ">age</label>
+        <input type="number" id="age" min="18" max="50">
+    </div>
+    <input type="submit" value="Register">
+    <input type="text" id="data" placeholder="enter some data" required pattern="[a-z]+at">
+    </form>
+</body>
+</html>
+<!-- [a-zA-Z0-9] -->
+ <!-- required pattern="[a-z]+at" -->

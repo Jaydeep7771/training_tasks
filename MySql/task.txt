@@ -1,0 +1,118 @@
+
+
+SELECT s.name, c.course_name
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+JOIN Courses c ON e.course_id = c.course_id;
+
+List all courses with the number of students enrolled in each course:
+SQL
+
+SELECT c.course_name, COUNT(e.student_id) AS student_count
+FROM Courses c
+LEFT JOIN Enrollment e ON c.course_id = e.course_id
+GROUP BY c.course_name;
+
+Find students who are enrolled in more than 2 courses:
+SQL
+
+SELECT s.name
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+GROUP BY s.name
+HAVING COUNT(e.course_id) > 2;
+
+Find the course with the highest number of students enrolled:
+SQL
+
+SELECT c.course_name
+FROM Courses c
+JOIN Enrollment e ON c.course_id = e.course_id
+GROUP BY c.course_name
+ORDER BY COUNT(e.student_id) DESC
+LIMIT 1;
+Retrieve the average GPA of students for each major:
+SQL
+
+SELECT major, AVG(gpa) AS average_gpa
+FROM Students
+GROUP BY major;
+
+Get the details of students who are enrolled in ‘Introduction to Programming’ course:
+SQL
+
+SELECT s.*
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+JOIN Courses c ON e.course_id = c.course_id
+WHERE c.course_name = 'Introduction to Programming';
+List all students who have a GPA higher than the average GPA of their major:
+SQL
+
+SELECT s.*
+FROM Students s
+JOIN (
+    SELECT major, AVG(gpa) AS avg_gpa
+    FROM Students
+    GROUP BY major
+) avg_gpas ON s.major = avg_gpas.major
+WHERE s.gpa > avg_gpas.avg_gpa;
+Show the total credits of courses each student is enrolled in:
+SQL
+
+SELECT s.name, SUM(c.credits) AS total_credits
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+JOIN Courses c ON e.course_id = c.course_id
+GROUP BY s.name;
+Find the students who are enrolled in courses but have not enrolled in any course in 2023:
+SQL
+
+SELECT s.name
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+WHERE e.enrollment_date < '2023-01-01'
+AND s.student_id NOT IN (
+    SELECT student_id
+    FROM Enrollment
+    WHERE enrollment_date >= '2023-01-01'
+);
+List all majors and the number of students with a GPA less than 3.0 in each major:
+SQL
+
+SELECT major, COUNT(*) AS student_count
+FROM Students
+WHERE gpa < 3.0
+GROUP BY major;
+Find students who have enrolled in the most number of courses:
+SQL
+
+SELECT s.name
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+GROUP BY s.name
+ORDER BY COUNT(e.course_id) DESC
+LIMIT 1;
+Retrieve the details of students enrolled in more than 1 course and their average GPA:
+SQL
+
+SELECT s.*, AVG(s.gpa) AS average_gpa
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+GROUP BY s.student_id
+HAVING COUNT(e.course_id) > 1;
+List the students and their total GPA for the courses they are enrolled in:
+SQL
+
+SELECT s.name, SUM(s.gpa) AS total_gpa
+FROM Students s
+JOIN Enrollment e ON s.student_id = e.student_id
+GROUP BY s.name;
+Get the number of students enrolled in each course, sorted by the number of students in descending order:
+SQL
+
+SELECT c.course_name, COUNT(e.student_id) AS student_count
+FROM Courses c
+JOIN Enrollment e ON c.course_id = e.course_id
+GROUP BY c.course_name
+ORDER BY student_count DESC;
